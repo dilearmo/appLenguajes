@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Registro</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/registro.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container" id="container-registro">
+		<form action="">
+			<div class="row">
+				<h2>Registro</h2>
+			</div>
+			<div class="row">
+   		        <label for="txtNombre" class="col-md-1 labelRegistro">Nombre: </label>
+      		    <input id="txtNombre" class="col-md-3 col-sm-12 col-xs-12" name="txtNombre" type="text" placeholder="Escriba su nombre">
+      	    </div>
+      	    <div class="row">
+	          	<label for="txtApellidos" class="col-md-1 labelRegistro">Apellidos: </label>
+  		        <input id="txtApellidos" class="col-md-3 col-sm-12 col-xs-12" name="txtApellidos" type="text" placeholder="Escriba sus apellidos">
+      	    </div>
+      	    <div class="row">
+  		        <label for="txtContrasena" class="col-md-1 labelRegistro">Contraseña: </label>
+	            <input id="txtContrasena" class="col-md-3 col-sm-12 col-xs-12" name="txtContrasena" type="password" placeholder="Escriba su contraseña">
+			</div>
+			<div class="row">
+  		        <label for="txtDireccionFisica" class="col-md-1 labelRegistro">Dirección física: </label>
+	            <textarea class="col-xs-12 col-sm-12 col-md-3" id="txtDireccionFisica" rows="2" name="txtDireccionFisica" type="text" placeholder="Escriba su domicilio"></textarea>
+			</div>
+			<div class="row">
+  		        <label for="txtCorreo" class="col-md-1 labelRegistro">Email: </label>
+	            <input id="txtCorreo" class="col-md-3 col-sm-12 col-xs-12" name="txtCorreo" type="email" placeholder="Escriba su email">
+			</div>
+			<button class="row" type="submit" onclick="">Registrarme</button>
+		</form>
+	</div>
+</body>
+</html>

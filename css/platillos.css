@@ -1,0 +1,34 @@
+body {
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    background-color: #0E2935;
+}
+
+h4 {
+    margin: 0;
+}
+
+#titleContainer {
+    background-color: white;
+    height: 110%;
+    margin-bottom: 10px;
+}
+
+#titleContainer h2 {
+    margin-left: 8px;
+}
+
+#titleContainer span {
+     border-bottom: solid rgba(18, 100, 113, 0.84);
+}
+
+#platosContainer {
+    background-color: white;
+}
+
+#platosContainer > div {
+    border-bottom: solid rgba(18, 100, 113, 0.84) 1px;
+    margin-left: 3px;
+    margin-right: 3px;
+}

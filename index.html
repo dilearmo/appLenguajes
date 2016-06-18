@@ -1,37 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>SpotiDi</title>
-	<script type="text/javascript" src="js/index.js"></script>
-	<script src="js/jquery-3.0.0.min.js"></script>
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-	<link rel="stylesheet" href="themes/temaAzulA.min.css" />
-	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css">
-	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-</head>
-<body>
-	<div data-role="page" data-theme="a">
-		<div data-role="content">
-			<div data-role="fieldcontain">
-				<label for="artista">Artista:</label>
-				<input type="text" id="artista" />
-			</div>
-			<button onclick="BuscarArtista()">Buscar</button>
-			<ul id="listaArtistas" data-role="listview" data-inset="true"></ul>
-		</div>
-	</div>
+<html>
 
-	<div data-role="page" id="artista">
-		<div data-role="content">
-			<div style="text-align: center;">
-				<h3 id="nombreArtista">Nombre del artista: </h3>
-				<p id="seguidores">Seguidores: </p>
-				<img id="imagen" alt="imagen">
-			</div>
-			<ul id="cancionesMasPopulares" data-inset="true" data-role="listview"></ul>
-		</div>
-	</div>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+
+    <link rel="stylesheet" href="css/loginnormalize.css">
+    <link rel="stylesheet" href="css/loginstyle.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/mediaqueries.css">
+
+    <title>Inicio</title>
+</head>
+
+<body>
+    <div class="app">
+    
+      <form class="form-signin">
+        <h4 class="section-heading"><span>Ingreso</span></h4>
+      	      <div class="row">
+      		        <div class="column">
+      		          	<label>Usuario </label>
+      			          <input id="username" class="full-width" type="text" placeholder="">
+      		        </div>
+      	      </div>
+      	      <div class="row">
+      		        <div class="column">
+      			          <label>Contraseña </label>
+      		            <input id="password" class="full-width" type="password" placeholder="">
+            				</div>
+      			      </div>
+      			      <input class="button-submit" type="submit" value="Ingresar">
+          			<div class="row" id="forgetPass">
+          				  <a href="registro.html" class="forgot">Registrarse</a>
+          			</div>
+          </form>
+    </div>
+    
+    
+    
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js">
+        app.initialize();
+    </script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  
+  
 </body>
+
 </html>
