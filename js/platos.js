@@ -85,3 +85,8 @@ function guardarPlato(idPlato) {
 	alert('Plato ' + sessionStorage.getItem('plato' + idPlato) + "_____" + sessionStorage.getItem('cantidad' + idPlato));
 	alert('Plato ' + sessionStorage.getItem('plato' + 0) + "_____" + sessionStorage.getItem('cantidad' + 0));
 }
+
+function cerrarSesion() {
+	sessionStorage.clear();
+	window.location = './index.html';
+}

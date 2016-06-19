@@ -14,7 +14,9 @@
 
   </head>
   <body>
-    <h2>Mi Cuenta</h2>
+    <div class="container">
+    	<h2>Mi Cuenta</h2>
+    </div>
 
 
 	<div class="navbar navbar-inverse navbar-fixed-top">
@@ -29,17 +31,99 @@
 		    </div>
     		<div class="collapse navbar-collapse">
 		      	<ul class="nav navbar-nav">
-			        <li class="active"><a href="platos.html">Platos</a></li>
-			        <li class="active"><a href="orden.html">Mi Orden</a></li>
-			        <li class="active"><a href="#">Mi Cuenta</a></li>
-			        <li><a href="#contact" data-toggle="collapse" data-target=".navbar-collapse.in">Cerrar Sesión</a></li>
+			        <li class="active"><a href="platos.html"><!--<i class="material-icons">restaurant_menu</i>-->Platos</a></li>
+			        <li class="active"><a href="orden.html"><!--<i class="material-icons">monetization_on</i>-->Mi Orden</a></li>
+			        <li class="active"><a href="#"><!--<i class="material-icons">perm_identity</i>-->Mi Cuenta</a></li>
+			        <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="cerrarSesion()">Cerrar Sesión</a></li>
 		      	</ul>
 	    	</div><!--/.nav-collapse -->
 	  	</div>
 	</div>
 
 	<div class="container">
-		<h1>Aqui va la cuenta</h1>
+		<ul class="collapsible" data-collapsible="accordion" id="listaPlatos">
+		    <li>
+		    	<div class="collapsible-header">
+		    		<span class="">Nombre: </span>
+		    		<span class="" id="spanNombre">Nombre del usuario</span>
+		    	</div>
+		    	<div class="collapsible-body">
+			    	<p>
+			    		<div class="container-fluid">
+			    			<div class="container-fluid">
+			    				<input type="text" id="txtNombre" name="txtNombre" value="Nombre">
+			    				<button onclick="modificarNombre()" type="text">Cambiar</button>
+			    			</div>
+			    		</div>
+			    	</p>
+		    	</div>
+		    </li>
+		    <li>
+			    <div class="collapsible-header">
+		    		<span class="">Apellidos: </span>
+		    		<span class="" id="spanApellidos">Apeliidos del usuario</span>
+		    	</div>
+		    	<div class="collapsible-body">
+			    	<p>
+			    		<div class="container-fluid">
+			    			<div class="container-fluid">
+			    				<input type="text" id="txtApellidos" name="txtApellidos" value="Apellidos">
+			    				<button onclick="modificarApellidos()" type="text">Cambiar</button>
+			    			</div>
+			    		</div>
+			    	</p>
+		    	</div>
+		    </li>
+		    <li>
+		    	<div class="collapsible-header">
+		    		<span class="">Contraseña: </span>
+		    		<span class="" id="spanContrasena">**********</span>
+		    	</div>
+		    	<div class="collapsible-body">
+			    	<p>
+			    		<div class="container-fluid">
+			    			<div class="container-fluid">
+			    				<input type="password" id="txtContrasena" name="txtContrasena" value="Contrasena">
+			    				<button onclick="modificarContrasena()" type="text">Cambiar</button>
+			    			</div>
+			    		</div>
+			    	</p>
+		    	</div>
+		    </li>
+		    <li>
+		    	<div class="collapsible-header">
+		    		<span class="">Dirección física: </span>
+		    		<span class="" id="spanDirFis">Direccion del usuario</span>
+		    	</div>
+		    	<div class="collapsible-body">
+			    	<p>
+			    		<div class="container-fluid">
+			    			<div class="container-fluid">
+			    				<textarea name="txtDireccionFisica" id="txtDireccionFisica" rows="2">Direccion del cliente</textarea>
+			    				<button onclick="modificarDireccion()" type="text">Cambiar</button>
+			    			</div>
+			    		</div>
+			    	</p>
+		    	</div>
+		    </li>
+		    <li>
+		    	<div class="collapsible-header">
+		    		<span class="">Nombre: </span>
+		    		<span class="" id="spanEmail">Nombre del usuario</span>
+		    	</div>
+		    	<div class="collapsible-body">
+			    	<p>
+			    		<div class="container-fluid">
+			    			<div class="container-fluid">
+			    				<input type="email" id="txtEmail" name="txtEmail" value="Correo">
+			    				<button onclick="modificarEmail()" type="text">Cambiar</button>
+			    			</div>
+			    		</div>
+			    	</p>
+		    	</div>
+		    </li>
+		  </ul>
+
 	</div>
 	
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

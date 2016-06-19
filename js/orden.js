@@ -70,3 +70,8 @@ function listarPlatos() {
 function eliminarPlato() {
 
 }
+
+function cerrarSesion() {
+	sessionStorage.clear();
+	window.location = './index.html';
+}
