@@ -1,3 +1,12 @@
+function setCollapsible() {
+	$(document).ready(function(){
+    	$('.collapsible').collapsible({
+    		accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    	});
+	});
+
+}
+
 function listarPlatos() {
 	for (var idPlato = 3; idPlato >= 0; idPlato--) {
 		
@@ -41,9 +50,9 @@ function listarPlatos() {
 
 		var boton = document.createElement('button');
 		boton.setAttribute('id', 'btn' + idPlato);
-		boton.setAttribute('onclick', 'guardarPlato(' + idPlato + ')');
+		boton.setAttribute('onclick', 'eliminarPlato(' + idPlato + ')');
 
-		boton.innerText = "Agregar a la orden";
+		boton.innerText = "Eliminar";
 
 		p.appendChild(spanDesc);
 		p.appendChild(divImg);
@@ -58,30 +67,6 @@ function listarPlatos() {
 	}
 }
 
-function setCollapsible() {
-	$(document).ready(function(){
-    	$('.collapsible').collapsible({
-    		accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-    	});
-	});
+function eliminarPlato() {
 
-}
-
-function guardarPlato(idPlato) {
-	//var plato = sessionStorage.getItem('plato' + idPlato);
-	//var cantidad = document.getElementById('cantidad' + idPlato);
-	var cantidad = 2;
-	/*if (plato != "") {*/
-		//alert('Entro a crear');
-		sessionStorage.setItem('plato' + idPlato, idPlato);
-		sessionStorage.setItem('cantidad' + idPlato, cantidad);
-	/*} else {
-		alert('Entro a agregar');
-		var temp = sessionStorage.getItem('platosGuardados');
-		temp += "__" + idPlato + "_" + cantidad;
-		//sessionStorage.removeItem('platosGuardados');
-		sessionStorage.setItem('platosGuardados', temp);
-	}*/
-	alert('Plato ' + sessionStorage.getItem('plato' + idPlato) + "_____" + sessionStorage.getItem('cantidad' + idPlato));
-	alert('Plato ' + sessionStorage.getItem('plato' + 0) + "_____" + sessionStorage.getItem('cantidad' + 0));
 }
