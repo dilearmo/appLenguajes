@@ -34,6 +34,9 @@ function listarPlatos() {
 		divImg.setAttribute('class', 'divImg');
 		var imagen = document.createElement('img');
 		imagen.setAttribute('class', 'imgPlato');
+		imagen.setAttribute('class', 'materialboxed responsive-img');
+		imagen.setAttribute('data-caption', 'Nombre del plato');
+		imagen.setAttribute('width', '75');
 		imagen.setAttribute('id', 'img' + idPlato);
 		imagen.setAttribute('alt', 'Imagen');
 		imagen.setAttribute('src', 'http://icon-icons.com/icons2/281/PNG/256/Guacamole-icon_30330.png');
@@ -63,6 +66,10 @@ function setCollapsible() {
     	$('.collapsible').collapsible({
     		accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
     	});
+
+    	$('.materialboxed').materialbox();
+
+
 	});
 
 }
