@@ -43,6 +43,10 @@ function listarPlatos() {
 		divImg.setAttribute('class', 'divImg');
 		var imagen = document.createElement('img');
 		imagen.setAttribute('class', 'imgPlato');
+		imagen.setAttribute('class', 'materialboxed responsive-img');
+		imagen.setAttribute('data-caption', 'Nombre del plato');
+		imagen.setAttribute('width', '75');
+		imagen.setAttribute('height', '75');
 		imagen.setAttribute('id', 'img' + idPlato);
 		imagen.setAttribute('alt', 'Imagen');
 		imagen.setAttribute('src', 'http://icon-icons.com/icons2/281/PNG/256/Guacamole-icon_30330.png');
@@ -50,6 +54,7 @@ function listarPlatos() {
 
 		var boton = document.createElement('button');
 		boton.setAttribute('id', 'btn' + idPlato);
+		boton.setAttribute('class', 'waves-effect waves-light btn')
 		boton.setAttribute('onclick', 'eliminarPlato(' + idPlato + ')');
 
 		boton.innerText = "Eliminar";

@@ -37,16 +37,18 @@ function listarPlatos() {
 		imagen.setAttribute('class', 'materialboxed responsive-img');
 		imagen.setAttribute('data-caption', 'Nombre del plato');
 		imagen.setAttribute('width', '75');
+		imagen.setAttribute('height', '75');
 		imagen.setAttribute('id', 'img' + idPlato);
 		imagen.setAttribute('alt', 'Imagen');
 		imagen.setAttribute('src', 'http://icon-icons.com/icons2/281/PNG/256/Guacamole-icon_30330.png');
 		divImg.appendChild(imagen);
 
 		var boton = document.createElement('button');
+		boton.setAttribute('class', 'waves-effect waves-light btn');
 		boton.setAttribute('id', 'btn' + idPlato);
-		boton.setAttribute('onclick', 'guardarPlato(' + idPlato + ')');
+		boton.setAttribute('onclick', /*'guardarPlato(' + idPlato + ');*/ 'Materialize.toast("Plato agregado a la orden!", 4000)');
 
-		boton.innerText = "Agregar a la orden";
+		boton.innerText = "Agregar";
 
 		p.appendChild(spanDesc);
 		p.appendChild(divImg);
