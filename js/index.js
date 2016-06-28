@@ -48,40 +48,34 @@ var app = {
     }
 };
 
-function BuscarArtista() {
-    //javascrpt
-    //var txtArtista = document.getElementById("artista");
-    //var   nombreArtista = txtArtista.value;
-
-    //JQuery
-    var nombreArtista = $('#artista').val();
-    var direccion = 'https://api.spotify.com/v1/search?type=artist&q='+nombreArtista;
-    var req = $.ajax({
-        url: direccion,
-        timeout: 10000,
-        success: function(datos) { procesarArtistas(datos) },
-        error: function(a, b, c) {error(a, b, c)}
-    });
-}
-
-function procesarArtistas(datos) {
-    $('#listaArtistas').empty();
-    //var lista = document.getElementById("listaArtistas");
-    $.each(datos.artists.items, function() {
-        var nuevoLi = document.createElement('li');
-        var a = document.createElement('a');
-        a.innerHTML = this.name; // Se usa this porque estamos recorriendo
-        a.href = 'prueba.html?id=' + this.id; // "#artista es el div vista con id artista"
-        nuevoLi.appendChild(a);
-        //lista.appendChild(nuevoLi);
-        $('#listaArtistas').append(nuevoLi);
-    });
-
-    //ESTO SIRVE PARA DARLE EL CSS A LO QUE SE GENERA
-
-    //$('ui-page').trigger('create');
-}
-
 function error(a, b, c) {
     alert("a: " + a.responseText + "a: " + a.status + "\n" + "b: " + b + "\n" + "c: " + c);
+}
+
+function loguear() {
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    if(username != "" && password != "") {
+        logueo(username, password);
+    } else {
+        Materialize.toast("Ingrese sus datos", 2000);
+    }
+}
+
+function logueo(nombreUsuario, contrasena) {
+    $.ajax({
+        url: 'http://proyectolenguajesws.azurewebsites.net/ServiciosUsuario.svc/login?nombreUsuario=' + nombreUsuario + '&contrasena=' + contrasena,
+        dataType: 'jsonp',
+        timeout: 10000,
+        success: function(datos) { ingresar(datos); },
+        error: function(a, b, c) { error(a, b, c); }
+    });
+}
+
+function ingresar(datos) {
+    if(datos == true) {
+        window.location.href = "platos.html";
+    } else {
+        Materialize.toast('Los datos son incorrectos', 4000);
+    }
 }

@@ -6,7 +6,12 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/registro.css">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+
 	<script src="js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -33,24 +38,24 @@
 				<h2>Registro</h2>
 			</div>
 			<div class="row">
-   		        <label for="txtNombre" class="col-md-1 labelRegistro">Nombre: </label>
-      		    <input id="txtNombre" class="col-md-3 col-sm-12 col-xs-12" name="txtNombre" type="text" placeholder="Escriba su nombre">
+   		        <label for="txtNombre" class=" labelRegistro">Nombre: </label>
+      		    <input id="txtNombre" class="" name="txtNombre" type="text" placeholder="Escriba su nombre">
       	    </div>
       	    <div class="row">
-	          	<label for="txtApellidos" class="col-md-1 labelRegistro">Apellidos: </label>
-  		        <input id="txtApellidos" class="col-md-3 col-sm-12 col-xs-12" name="txtApellidos" type="text" placeholder="Escriba sus apellidos">
+	          	<label for="txtApellidos" class=" labelRegistro">Apellidos: </label>
+  		        <input id="txtApellidos" class="" name="txtApellidos" type="text" placeholder="Escriba sus apellidos">
       	    </div>
       	    <div class="row">
-  		        <label for="txtContrasena" class="col-md-1 labelRegistro">Contraseña: </label>
-	            <input id="txtContrasena" class="col-md-3 col-sm-12 col-xs-12" name="txtContrasena" type="password" placeholder="Escriba su contraseña">
+  		        <label for="txtContrasena" class=" labelRegistro">Contraseña: </label>
+	            <input id="txtContrasena" class="" name="txtContrasena" type="password" placeholder="Escriba su contraseña">
 			</div>
 			<div class="row">
-  		        <label for="txtDireccionFisica" class="col-md-1 labelRegistro">Dirección física: </label>
-	            <textarea class="col-xs-12 col-sm-12 col-md-3" id="txtDireccionFisica" rows="2" name="txtDireccionFisica" type="text" placeholder="Escriba su domicilio"></textarea>
+  		        <label for="txtDireccionFisica" class="labelRegistro">Dirección física: </label>
+	            <textarea class="materialize-textarea" id="txtDireccionFisica" rows="2" name="txtDireccionFisica" type="text" placeholder="Escriba su domicilio"></textarea>
 			</div>
 			<div class="row">
-  		        <label for="txtCorreo" class="col-md-1 labelRegistro">Email: </label>
-	            <input id="txtCorreo" class="col-md-3 col-sm-12 col-xs-12" name="txtCorreo" type="email" placeholder="Escriba su email">
+  		        <label for="txtCorreo" class="labelRegistro">Email: </label>
+	            <input id="txtCorreo" class="" name="txtCorreo" type="email" placeholder="Escriba su email">
 			</div>
 			<button class="row" type="submit" onclick="">Registrarme</button>
 		</form>
