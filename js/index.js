@@ -64,7 +64,7 @@ function loguear() {
 
 function logueo(nombreUsuario, contrasena) {
     $.ajax({
-        url: 'http://proyectolenguajesws.azurewebsites.net/ServiciosUsuario.svc/login?nombreUsuario=' + nombreUsuario + '&contrasena=' + contrasena,
+        url: 'https://proyectolenguajes.azurewebsites.net/ServiciosUsuario.svc/login?nombreUsuario=' + nombreUsuario + '&contrasena=' + contrasena,
         dataType: 'jsonp',
         timeout: 10000,
         success: function(datos) { ingresar(datos); },
@@ -74,7 +74,7 @@ function logueo(nombreUsuario, contrasena) {
 
 function ingresar(datos) {
     if(datos == true) {
-        window.location.href = "platos.html";
+       // window.location.href = "platos.html";
     } else {
         Materialize.toast('Los datos son incorrectos', 4000);
     }
