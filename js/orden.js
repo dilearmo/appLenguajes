@@ -7,9 +7,28 @@ function setCollapsible() {
 
 }
 
-function listarPlatos() {
-	for (var idPlato = 3; idPlato >= 0; idPlato--) {
-		
+function getPlatosInSession() {
+	for (var i = 0; i <= sessionStorage.length - 1; i++) {
+		var key = sessionStorage.key(i);
+		var item = sessionStorage.getItem(key);
+		if(key.search('plato') > -1) {
+			var plato = buscarPlatoPorId(item);
+		}
+	}
+}
+
+function getCantidad(id) {
+	for (var i = 0; i <= sessionStorage.length - 1; i++) {
+		var key = sessionStorage.key(i);
+		var item = sessionStorage.getItem(key);
+		if(key.search('cantidad'+id) > -1) {
+			return item;
+		}
+	}
+}
+
+function listarPlatos(plato) {
+		var idPlato = plato.id;
 		var lista = document.getElementById('listaPlatos');
 		var li = document.createElement('li');
 		li.setAttribute('id', 'li' + idPlato);
@@ -21,12 +40,12 @@ function listarPlatos() {
 		var spanPlato = document.createElement('span');
 		spanPlato.setAttribute('class', 'plato');
 		spanPlato.setAttribute('id', 'plato' + idPlato);
-		spanPlato.innerText = "Plato ";
+		spanPlato.innerText = plato.nombre;
 
 		var	spanPrecio = document.createElement('span');
 		spanPrecio.setAttribute('class', 'precio');
 		spanPrecio.setAttribute('id', 'precio' + idPlato);
-		spanPrecio.innerText = "Precio";
+		spanPrecio.innerText = plato.precio;
 
 		divHeader.appendChild(spanPlato);
 		divHeader.appendChild(spanPrecio);
@@ -37,7 +56,7 @@ function listarPlatos() {
 		var spanDesc = document.createElement('span');
 		spanDesc.setAttribute('class', 'descripcion');
 		spanDesc.setAttribute('id', 'desc' + idPlato);
-		spanDesc.innerText = "Descripcion completa";
+		spanDesc.innerText = plato.descripcion;
 
 		var divImg = document.createElement('div');
 		divImg.setAttribute('class', 'divImg');
@@ -52,6 +71,11 @@ function listarPlatos() {
 		imagen.setAttribute('src', 'http://icon-icons.com/icons2/281/PNG/256/Guacamole-icon_30330.png');
 		divImg.appendChild(imagen);
 
+		var inputCantidad = document.createElement('input');
+		inputCantidad.setAttribute('value', 'Cantidad: ' + getCantidad(idPlato));
+		inputCantidad.setAttribute('disabled', true);
+		inputCantidad.setAttribute('id', 'cantidad' + idPlato);
+
 		var boton = document.createElement('button');
 		boton.setAttribute('id', 'btn' + idPlato);
 		boton.setAttribute('class', 'waves-effect waves-light btn')
@@ -61,6 +85,7 @@ function listarPlatos() {
 
 		p.appendChild(spanDesc);
 		p.appendChild(divImg);
+		p.appendChild(inputCantidad);
 		p.appendChild(boton);
 		divContent.appendChild(p);
 
@@ -68,15 +93,25 @@ function listarPlatos() {
 		li.appendChild(divContent);
 		lista.appendChild(li);
 		setCollapsible();
-
-	}
 }
 
-function eliminarPlato() {
-
+function eliminarPlato(id) {
+	sessionStorage.removeItem('cantidad'+id);
+	sessionStorage.removeItem('plato'+id);
 }
 
 function cerrarSesion() {
 	sessionStorage.clear();
 	window.location = './index.html';
+}
+
+function buscarPlatoPorId(id) {
+	var req = $.ajax({
+		url: "http://pruebaservicioweb777.azurewebsites.net/ServicioPlatos.svc/platoPorId?id=" + id,
+		timeout: 10000,
+		dataType: 'jsonp'
+	});
+
+	req.success(function (plato) {listarPlatos(plato);});
+	req.error(function(a, b, c) {alert('Me cago')});
 }

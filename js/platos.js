@@ -1,6 +1,18 @@
-function listarPlatos() {
-	for (var idPlato = 3; idPlato >= 0; idPlato--) {
-		
+function getListaPlatos() {
+	var req = $.ajax({
+		url: "http://pruebaservicioweb777.azurewebsites.net/ServicioPlatos.svc/obtenerPlatosDisponibles",
+		timeout: 10000,
+		dataType: 'jsonp'
+	});
+
+	req.success(function (listaPlatos) {listarPlatos(listaPlatos)});
+	req.error(function(a, b, c) {alert('Me cago')});
+}
+
+function listarPlatos(listaPlatos) {
+	$.each(listaPlatos, function() {
+	//for (var idPlato = 3; idPlato >= 0; idPlato--) {
+		var idPlato = this.id;
 		var lista = document.getElementById('listaPlatos');
 		var li = document.createElement('li');
 		li.setAttribute('id', 'li' + idPlato);
@@ -12,12 +24,12 @@ function listarPlatos() {
 		var spanPlato = document.createElement('span');
 		spanPlato.setAttribute('class', 'plato');
 		spanPlato.setAttribute('id', 'plato' + idPlato);
-		spanPlato.innerText = "Plato ";
+		spanPlato.innerText = this.nombre;
 
 		var	spanPrecio = document.createElement('span');
 		spanPrecio.setAttribute('class', 'precio');
 		spanPrecio.setAttribute('id', 'precio' + idPlato);
-		spanPrecio.innerText = "Precio";
+		spanPrecio.innerText = "₡" + this.precio;
 
 		divHeader.appendChild(spanPlato);
 		divHeader.appendChild(spanPrecio);
@@ -28,7 +40,7 @@ function listarPlatos() {
 		var spanDesc = document.createElement('span');
 		spanDesc.setAttribute('class', 'descripcion');
 		spanDesc.setAttribute('id', 'desc' + idPlato);
-		spanDesc.innerText = "Descripcion completa";
+		spanDesc.innerText = this.descripcion;
 
 		var divImg = document.createElement('div');
 		divImg.setAttribute('class', 'divImg');
@@ -43,15 +55,22 @@ function listarPlatos() {
 		imagen.setAttribute('src', 'http://icon-icons.com/icons2/281/PNG/256/Guacamole-icon_30330.png');
 		divImg.appendChild(imagen);
 
+		var inputCantidad = document.createElement('input');
+		inputCantidad.setAttribute('type', 'number');
+		inputCantidad.setAttribute('min', '1');
+		inputCantidad.setAttribute('value', '1');
+		inputCantidad.setAttribute('id', 'cantidad' + idPlato);
+
 		var boton = document.createElement('button');
 		boton.setAttribute('class', 'waves-effect waves-light btn');
 		boton.setAttribute('id', 'btn' + idPlato);
-		boton.setAttribute('onclick', /*'guardarPlato(' + idPlato + ');*/ 'Materialize.toast("Plato agregado a la orden!", 4000)');
+		boton.setAttribute('onclick', 'guardarPlato(' + idPlato + '); Materialize.toast("Plato agregado a la orden!", 4000)');
 
 		boton.innerText = "Agregar";
 
 		p.appendChild(spanDesc);
 		p.appendChild(divImg);
+		p.appendChild(inputCantidad);
 		p.appendChild(boton);
 		divContent.appendChild(p);
 
@@ -59,14 +78,14 @@ function listarPlatos() {
 		li.appendChild(divContent);
 		lista.appendChild(li);
 		setCollapsible();
-
-	}
+	});
+	//}
 }
 
 function setCollapsible() {
 	$(document).ready(function(){
     	$('.collapsible').collapsible({
-    		accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    		accordion : false 
     	});
 
     	$('.materialboxed').materialbox();
@@ -77,25 +96,25 @@ function setCollapsible() {
 }
 
 function guardarPlato(idPlato) {
-	//var plato = sessionStorage.getItem('plato' + idPlato);
-	//var cantidad = document.getElementById('cantidad' + idPlato);
-	var cantidad = 2;
-	/*if (plato != "") {*/
-		//alert('Entro a crear');
+	var cantidad = document.getElementById('cantidad'+idPlato).value;
 		sessionStorage.setItem('plato' + idPlato, idPlato);
 		sessionStorage.setItem('cantidad' + idPlato, cantidad);
-	/*} else {
-		alert('Entro a agregar');
-		var temp = sessionStorage.getItem('platosGuardados');
-		temp += "__" + idPlato + "_" + cantidad;
-		//sessionStorage.removeItem('platosGuardados');
-		sessionStorage.setItem('platosGuardados', temp);
-	}*/
-	alert('Plato ' + sessionStorage.getItem('plato' + idPlato) + "_____" + sessionStorage.getItem('cantidad' + idPlato));
-	alert('Plato ' + sessionStorage.getItem('plato' + 0) + "_____" + sessionStorage.getItem('cantidad' + 0));
 }
 
 function cerrarSesion() {
 	sessionStorage.clear();
 	window.location = './index.html';
+}
+
+function filtrar(element) {
+    var value = $("#filtrador").val();
+    
+    $("#listaPlatos > li").each(function() {
+        if ($(this).text().toLowerCase().search(value.toLowerCase()) > -1) {
+            $(this).show();
+        }
+        else {
+            $(this).hide();
+        }
+    });
 }

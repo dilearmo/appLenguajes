@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/platos.css">
 
   </head>
-  <body>
+  <body onload="getListaPlatos()">
     <div class="container">
     	<h2>Platos</h2>
     </div>
@@ -40,8 +40,11 @@
 	</div>
 
 	<div class="container">
+		<form class="ui-filterable">
+			<input id="filtrador" type="text" onkeyup="filtrar()">
+		</form>
 		<ul class="collapsible" data-collapsible="accordion" id="listaPlatos">
-		    <li>
+		    <!--<li>
 		    	<div class="collapsible-header">
 		    		<span class="plato">Plato</span>
 		    		<span class="precio">Precio</span>
@@ -55,23 +58,10 @@
 			    		<button onclick="" type="button">Agregar a la orden</button>
 			    	</p>
 		    	</div>
-		    </li>
-		    <li>
-			    <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-			    <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-		    </li>
-		    <li>
-		    	<div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-		    	<div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-		    </li>
-		    <li>
-		    	<div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-		    	<div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-		    </li>
-		  </ul>
-
-		  <button onclick="listarPlatos()">Listar</button>
+		    </li>-->
 	</div>
+	
+
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
 
