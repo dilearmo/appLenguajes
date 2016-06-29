@@ -11,10 +11,13 @@
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
-
+	
+	<script src="js/registro.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 </head>
 <body>
+	<div class="progress" id="barraSuperior"></div>
+
 	<div class="navbar navbar-inverse navbar-fixed-top">
   		<div class="container">
     		<div class="navbar-header">
@@ -33,30 +36,30 @@
 	</div>
 
 	<div class="container" id="container-registro">
-		<form action="">
+		<form method="post">
 			<div class="row">
 				<h2>Registro</h2>
 			</div>
-			<div class="row">
-   		        <label for="txtNombre" class=" labelRegistro">Nombre: </label>
-      		    <input id="txtNombre" class="" name="txtNombre" type="text" placeholder="Escriba su nombre">
+			<div class="input-field row">
+   		        <label for="txtNombre" class="validate">Nombre</label>
+      		    <input id="txtNombre" class="" name="txtNombre" type="text" required>
       	    </div>
-      	    <div class="row">
-	          	<label for="txtApellidos" class=" labelRegistro">Apellidos: </label>
-  		        <input id="txtApellidos" class="" name="txtApellidos" type="text" placeholder="Escriba sus apellidos">
+      	    <div class="input-field row">
+  		        <input id="txtApellidos" class="" name="txtApellidos" type="text" required>
+	          	<label for="txtApellidos" class="validate ">Apellidos</label>
       	    </div>
-      	    <div class="row">
-  		        <label for="txtContrasena" class=" labelRegistro">Contraseña: </label>
-	            <input id="txtContrasena" class="" name="txtContrasena" type="password" placeholder="Escriba su contraseña">
+      	    <div class="input-field row">
+	            <input id="txtContrasena" class="" name="txtContrasena" type="password" required>
+  		        <label for="txtContrasena" class="validate ">Contraseña</label>
 			</div>
-			<div class="row">
-  		        <label for="txtDireccionFisica" class="labelRegistro">Dirección física: </label>
-	            <textarea class="materialize-textarea" id="txtDireccionFisica" rows="2" name="txtDireccionFisica" type="text" placeholder="Escriba su domicilio"></textarea>
+			<div class="input-field row">
+	            <textarea class="materialize-textarea" id="txtDireccionFisica" rows="2" name="txtDireccionFisica" type="text" required></textarea>
+  		        <label for="txtDireccionFisica" class="validate">Dirección física</label>
 			</div>
-			<div class="row">
-  		        <label for="txtCorreo" class="labelRegistro">Email: </label>
-	            <input id="txtCorreo" class="" name="txtCorreo" type="email" placeholder="Escriba su email">
-			</div>
+			<div class="input-field row">
+          		<input id="txtCorreo" name="txtCorreo" type="email" class="validate" required>
+          		<label for="txtCorreo">Email:</label>
+        	</div>
 			<button class="waves-effect waves-light btn" type="submit" onclick="">Registrarme</button>
 		</form>
 	</div>

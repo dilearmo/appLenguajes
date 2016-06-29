@@ -8,4 +8,14 @@ body {
 }
 
 .imgPlato {
+
+}
+
+.precio {
+	float: right;
+}
+
+#barraSuperior {
+	background-color: #26a69a;
+	border-radius: 0px;
 }

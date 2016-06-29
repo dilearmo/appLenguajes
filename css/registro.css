@@ -12,3 +12,10 @@ body {
 
 #txtDireccionFisica {
 }
+
+#barraSuperior {
+	height: 17px;
+	background-color: #26a69a;
+	border-radius: 0px;
+	margin: 0;
+}

@@ -8,12 +8,20 @@ function setCollapsible() {
 }
 
 function getPlatosInSession() {
+	/*var promedio = 100 / sessionStorage.length;
+	var conteoTiempo = 0;*/
 	for (var i = 0; i <= sessionStorage.length - 1; i++) {
 		var key = sessionStorage.key(i);
 		var item = sessionStorage.getItem(key);
 		if(key.search('plato') > -1) {
 			var plato = buscarPlatoPorId(item);
 		}
+		/*conteoTiempo = conteoTiempo + promedio;
+		if (conteoTiempo > 97) {
+			conteoTiempo = 100;
+		}
+		$('#progreso').css('width', conteoTiempo + '%');
+		alert(conteoTiempo + "  "  + promedio);*/
 	}
 }
 
@@ -45,7 +53,7 @@ function listarPlatos(plato) {
 		var	spanPrecio = document.createElement('span');
 		spanPrecio.setAttribute('class', 'precio');
 		spanPrecio.setAttribute('id', 'precio' + idPlato);
-		spanPrecio.innerText = plato.precio;
+		spanPrecio.innerHTML = '₡' + plato.precio;
 
 		divHeader.appendChild(spanPlato);
 		divHeader.appendChild(spanPrecio);
@@ -93,11 +101,13 @@ function listarPlatos(plato) {
 		li.appendChild(divContent);
 		lista.appendChild(li);
 		setCollapsible();
+		calcularTotal(idPlato);
 }
 
 function eliminarPlato(id) {
 	sessionStorage.removeItem('cantidad'+id);
 	sessionStorage.removeItem('plato'+id);
+	$('#li'+id).remove();
 }
 
 function cerrarSesion() {
@@ -114,4 +124,21 @@ function buscarPlatoPorId(id) {
 
 	req.success(function (plato) {listarPlatos(plato);});
 	req.error(function(a, b, c) {alert('Me cago')});
+}
+
+function calcularTotal(id) {
+	if( $('#total').val() == '' ) {
+		var t = sessionStorage.getItem('precio' + id).replace("₡", "") * sessionStorage.getItem('cantidad' + id);
+		$('#total').val(t);
+		document.getElementById('total').innerText = "₡" + t;
+	} else {
+		var total = $('#total').val();
+		total = parseInt(total) + parseInt(sessionStorage.getItem('precio' + id).replace("₡", "") * sessionStorage.getItem('cantidad' + id));
+		$('#total').val(total);
+		document.getElementById('total').innerText = "₡" + total;
+	}
+}
+
+function quitarBarra() {
+	$('#progreso').remove();
 }

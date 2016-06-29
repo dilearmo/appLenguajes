@@ -10,3 +10,12 @@ body {
 .imgPlato {
 	width: 100%;
 }
+
+.precio {
+	float: right;
+}
+
+#barraSuperior {
+	background-color: #26a69a;
+	border-radius: 0px;
+}

@@ -29,7 +29,7 @@ function listarPlatos(listaPlatos) {
 		var	spanPrecio = document.createElement('span');
 		spanPrecio.setAttribute('class', 'precio');
 		spanPrecio.setAttribute('id', 'precio' + idPlato);
-		spanPrecio.innerText = "₡" + this.precio;
+		spanPrecio.innerHTML = '<span>₡</span>'+this.precio;
 
 		divHeader.appendChild(spanPlato);
 		divHeader.appendChild(spanPrecio);
@@ -79,6 +79,7 @@ function listarPlatos(listaPlatos) {
 		lista.appendChild(li);
 		setCollapsible();
 	});
+	$('#progreso').remove();
 	//}
 }
 
@@ -97,8 +98,10 @@ function setCollapsible() {
 
 function guardarPlato(idPlato) {
 	var cantidad = document.getElementById('cantidad'+idPlato).value;
+	var precio = document.getElementById('precio' + idPlato).innerText;
 		sessionStorage.setItem('plato' + idPlato, idPlato);
 		sessionStorage.setItem('cantidad' + idPlato, cantidad);
+		sessionStorage.setItem('precio' + idPlato, precio);
 }
 
 function cerrarSesion() {

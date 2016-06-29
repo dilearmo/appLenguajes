@@ -14,6 +14,12 @@
 
   </head>
   <body onload="getListaPlatos()">
+	<div class="progress" id="barraSuperior"></div>
+
+	<div class="progress" id="progreso">
+	    <div class="indeterminate"></div>
+	</div>
+
     <div class="container">
     	<h2>Platos</h2>
     </div>
@@ -41,7 +47,8 @@
 
 	<div class="container">
 		<form class="ui-filterable">
-			<input id="filtrador" type="text" onkeyup="filtrar()">
+			<!--<span for="">Buscar</span>-->
+			<input id="filtrador" type="text" onkeyup="filtrar()" placeholder="Busque el plato que desee">
 		</form>
 		<ul class="collapsible" data-collapsible="accordion" id="listaPlatos">
 		    <!--<li>
