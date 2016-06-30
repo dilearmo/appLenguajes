@@ -4,14 +4,12 @@ function getListaPlatos() {
 		timeout: 10000,
 		dataType: 'jsonp'
 	});
-
 	req.success(function (listaPlatos) {listarPlatos(listaPlatos)});
 	req.error(function(a, b, c) {alert('Me cago')});
 }
 
 function listarPlatos(listaPlatos) {
 	$.each(listaPlatos, function() {
-	//for (var idPlato = 3; idPlato >= 0; idPlato--) {
 		var idPlato = this.id;
 		var lista = document.getElementById('listaPlatos');
 		var li = document.createElement('li');
@@ -80,7 +78,6 @@ function listarPlatos(listaPlatos) {
 		setCollapsible();
 	});
 	$('#progreso').remove();
-	//}
 }
 
 function setCollapsible() {
@@ -88,10 +85,7 @@ function setCollapsible() {
     	$('.collapsible').collapsible({
     		accordion : false 
     	});
-
     	$('.materialboxed').materialbox();
-
-
 	});
 
 }
