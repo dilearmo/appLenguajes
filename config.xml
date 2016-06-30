@@ -13,6 +13,8 @@
         App Android Proyecto Lenguajes 
     </description>
 
+<icon src="icon.png"/>
+
     <author href="https://www.facebook.com/dilearmo" email="dilearmo@hotmail.com">
         Diego Leonardo Arias Mora 
     </author>
