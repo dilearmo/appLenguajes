@@ -105,10 +105,23 @@ function listarPlatos(plato) {
 }
 
 function eliminarPlato(id) {
-	reducirTotal(id);
-	$('#li'+id).remove();
-	sessionStorage.removeItem('cantidad'+id);
-	sessionStorage.removeItem('plato'+id);
+	swal({
+	  title: "¿Está seguro que desea eliminar el plato de la orden?",
+	  text: "Esta acción no podrá deshacerse",
+	  type: "warning",
+	  showCancelButton: true,
+	  confirmButtonClass: "btn-danger",
+	  confirmButtonText: "Eliminar",
+	  cancelButtonText: "Cancelar",
+	  closeOnConfirm: false
+	},
+	function(){
+		reducirTotal(id);
+		$('#li'+id).remove();
+		sessionStorage.removeItem('cantidad'+id);
+		sessionStorage.removeItem('plato'+id);
+		swal("¡Listo!", "El plato fue eliminado de la orden", "success");
+	});
 }
 
 function cerrarSesion() {
@@ -149,4 +162,32 @@ function reducirTotal(id) {
 
 function quitarBarra() {
 	$('#progreso').remove();
+}
+
+function realizarPedido() {
+	swal({
+	  title: "¿Realizar pedido?",
+	  text: "Total: " + document.getElementById('total').innerText,
+	  type: "warning",
+	  showCancelButton: true,
+	  confirmButtonClass: "btn-success",
+	  confirmButtonText: "Realizar",
+	  cancelButtonText: "Cancelar",
+	  closeOnConfirm: false
+	},
+	function(){
+		enviarPedido();
+		swal("¡Listo!", "Su pedido ha sido enviado\n¡Pronto estará disfrutando su comida!", "success");
+	});
+}
+
+function enviarPedido() {
+	var req = $.ajax({
+		url: "http://pruebaservicioweb777.azurewebsites.net/ServicioPlatos.svc/platoPorId?id=" + id,
+		timeout: 10000,
+		dataType: 'jsonp'
+	});
+
+	req.success(function (plato) {listarPlatos(plato);});
+	req.error(function(a, b, c) {alert('Me cago')});
 }
