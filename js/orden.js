@@ -105,9 +105,10 @@ function listarPlatos(plato) {
 }
 
 function eliminarPlato(id) {
+	reducirTotal(id);
+	$('#li'+id).remove();
 	sessionStorage.removeItem('cantidad'+id);
 	sessionStorage.removeItem('plato'+id);
-	$('#li'+id).remove();
 }
 
 function cerrarSesion() {
@@ -137,6 +138,13 @@ function calcularTotal(id) {
 		$('#total').val(total);
 		document.getElementById('total').innerText = "₡" + total;
 	}
+}
+
+function reducirTotal(id) {
+	var total = $('#total').val();
+	total = parseInt(total) - parseInt(sessionStorage.getItem('precio' + id).replace("₡", "") * sessionStorage.getItem('cantidad' + id));
+	$('#total').val(total);
+	document.getElementById('total').innerText = "₡" + total;
 }
 
 function quitarBarra() {

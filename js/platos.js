@@ -45,7 +45,7 @@ function listarPlatos(listaPlatos) {
 		var imagen = document.createElement('img');
 		imagen.setAttribute('class', 'imgPlato');
 		imagen.setAttribute('class', 'materialboxed responsive-img');
-		imagen.setAttribute('data-caption', 'Nombre del plato');
+		imagen.setAttribute('data-caption', this.nombre);
 		imagen.setAttribute('width', '75');
 		imagen.setAttribute('height', '75');
 		imagen.setAttribute('id', 'img' + idPlato);
