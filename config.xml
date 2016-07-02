@@ -17,6 +17,15 @@
     <author href="https://www.facebook.com/dilearmo" email="dilearmo@hotmail.com">
         Diego Leonardo Arias Mora 
     </author>
+	
+    	<plugin name="org.apache.cordova.geolocation" spec="0.3.12" source="pgb" />
+    
+	<feature name="http://api.phonegap.com/1.0/device" />
+	
+	<feature name="http://api.phonegap.com/1.0/geolocation"/>
+     	
+	<preference name="permissions" value="none"/>
+	
 
     <gap:plugin name="cordova-plugin-whitelist" source="npm" />
     <access origin="*" />
