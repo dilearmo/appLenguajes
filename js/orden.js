@@ -76,7 +76,7 @@ function listarPlatos(plato) {
 		imagen.setAttribute('height', '75');
 		imagen.setAttribute('id', 'img' + idPlato);
 		imagen.setAttribute('alt', 'Imagen');
-		imagen.setAttribute('src', 'http://icon-icons.com/icons2/281/PNG/256/Guacamole-icon_30330.png');
+		imagen.setAttribute('src', 'http://pruebaservicioweb777.azurewebsites.net/images/Unown_D_(dream_world).png');
 		divImg.appendChild(imagen);
 
 		var inputCantidad = document.createElement('input');
@@ -137,7 +137,7 @@ function buscarPlatoPorId(id) {
 	});
 
 	req.success(function (plato) {listarPlatos(plato);});
-	req.error(function(a, b, c) {alert('Me cago')});
+	req.error(function(a, b, c) {alert('Error interno de la base de datos')});
 }
 
 function calcularTotal(id) {
@@ -182,12 +182,41 @@ function realizarPedido() {
 }
 
 function enviarPedido() {
-	var req = $.ajax({
-		url: "http://pruebaservicioweb777.azurewebsites.net/ServicioPlatos.svc/platoPorId?id=" + id,
+	var reqPedido = $.ajax({
+		url: "http://pruebaservicioweb777.azurewebsites.net/ServiciosPedidos.svc/guardarPedido?estado=3&idCliente=" 
+		+ sessionStorage.getItem("idUsuario") +"&fecha=" + obtenerFechaActual() + "&lat=" + $("#lat").val() + "&lon=" + $("#lon").val(),
 		timeout: 10000,
 		dataType: 'jsonp'
 	});
+	setTimeout(ganarTiempo(), 2000);
+	var idNuevoPedido = reqPedido.success(function(idResultado) { insertarDetalles(idResultado) });
+	reqPedido.error(function(a, b, c) {alert('Error interno de la base de datos')});
+}
 
-	req.success(function (plato) {listarPlatos(plato);});
-	req.error(function(a, b, c) {alert('Me cago')});
+function obtenerFechaActual() {
+	var fecha = new Date();
+	return fecha.getFullYear() + "-" + fecha.getMonth() + "-" + fecha.getDate() + " " + fecha.getHours() + ":" 
+	+ fecha.getMinutes() + ":" + fecha.getSeconds() + "." + fecha.getMilliseconds();
+}
+
+function ganarTiempo() {
+
+}
+
+function insertarDetalles(idNuevoPedido) {
+	for (var i = 0; i <= sessionStorage.length - 1; i++) {
+		var key = sessionStorage.key(i);
+		var item = sessionStorage.getItem(key);
+		if(key.search('plato') > -1) {
+			var req = $.ajax({
+				url: "http://pruebaservicioweb777.azurewebsites.net/ServiciosDetalles.svc/guardarDetalle?idPedido=" + idNuevoPedido 
+				+ "&idPlato=" + item + "&cantidad=" + sessionStorage.getItem("cantidad" + item),
+				timeout: 10000,
+				dataType: 'jsonp'
+			});
+
+			req.error(function(a, b, c) {alert('Error interno de la base de datos')});
+			setTimeout (ganarTiempo(), 1000);
+		}
+	}
 }

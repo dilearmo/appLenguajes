@@ -67,16 +67,34 @@ function logueo(nombreUsuario, contrasena) {
         url: 'http://pruebaservicioweb777.azurewebsites.net/ServiciosUsuario.svc/login?nombreUsuario=' + nombreUsuario + '&contrasena=' + contrasena,
         dataType: 'jsonp',
         timeout: 10000,
-        success: function(datos) { ingresar(datos); },
+        success: function(datos) { ingresar(datos, nombreUsuario); },
         error: function(a, b, c) { error(a, b, c); }
     });
 }
 
-function ingresar(datos) {
+function ingresar(datos, username) {
     if(datos == true) {
-        //GET ID ******************************************************
-        window.location.href = "platos.html";
+        obtenerIdUsuario(username);
     } else {
         Materialize.toast('Los datos son incorrectos', 4000);
     }
+}
+
+function obtenerIdUsuario(username) {
+    $.ajax({
+        url: 'http://pruebaservicioweb777.azurewebsites.net/ServiciosUsuario.svc/getIdByUsername?username=' + username,
+        dataType: 'jsonp',
+        timeout: 10000,
+        success: function(id) { ingresarIdUsuarioInSession(id); },
+        error: function(a, b, c) { error(a, b, c); }
+    });
+}
+
+function ingresarIdUsuarioInSession(id) {
+    sessionStorage.setItem('idUsuario', id);
+    setTimeout (pasarAPlatos(), 2000);
+}
+
+function pasarAPlatos() {
+    window.location.href = "platos.html";
 }

@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="css/loginnormalize.css">
     <link rel="stylesheet" href="css/loginstyle.css">
     <link rel="stylesheet" href="css/materialize.min.css">
-    <link rel="stylesheet" href="css/mediaqueries.css">
     <link rel="stylesheet" href="css/index.css">
 
     <title>Inicio</title>
@@ -21,7 +20,7 @@
     <div class="app">
     
       <div class="form-signin" method="post">
-        <h4 class="section-heading"><span>Ingreso</span></h4>
+        <h4 class="section-heading"><span>Inicio de sesión</span></h4>
       	      <div class="row">
       		        <div class="column">
       		          	<label>Usuario </label>
@@ -33,16 +32,58 @@
       			          <label>Contraseña </label>
       		            <input id="password" class="full-width" type="password" placeholder="">
             				</div>
-      			      </div>
-      			      <button class="waves-effect waves-light btn" type="submit" onclick="loguear()">Ingresar</button>
-                  <a href="platos.html">Platos</a>
-          			<div class="row" id="forgetPass">
-          				  <a href="registro.html" class="forgot" onclick="">Registrarse</a>
+      			   </div>
+      			   <button class="waves-effect waves-light btn" type="submit" onclick="loguear()">Ingresar</button>
+               <a href="platos.html">Platos</a>
+          		<div class="row" id="forgetPass">
+                 <br>
+                 <label>¿No posee una cuenta?</label>
+          		  <a href="registro.html" class="forgot" onclick="">Regístrese aquí</a>
           			</div>
           </div>
     </div>
-    
-    
+    <!--<div id="status"></div>
+    <button onclick="loginFB();">Ingreso con Facebook</button>
+    <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '1782448542041814',
+            xfbml      : true,
+            version    : 'v2.6'
+          });
+
+          FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                document.getElementById('status').innerHTML = 'Conectado';
+            } else if (response.status === 'not_authorized') {
+                document.getElementById('status').innerHTML = 'No conectado';
+            } else {
+              document.getElementById('status').innerHTML = 'Se ha cerrado la sesion';
+            }
+          });
+
+        };
+
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "//connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+
+        function loginFB() {
+          FB.login(function(response) {
+            if (response.status === 'connected') {
+                document.getElementById('status').innerHTML = 'Conectado';
+            } else if (response.status === 'not_authorized') {
+                document.getElementById('status').innerHTML = 'No conectado';
+            } else {
+              document.getElementById('status').innerHTML = 'Se ha cerrado la sesion';
+            }
+          });
+        }
+      </script>-->
     
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>

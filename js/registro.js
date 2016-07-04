@@ -15,13 +15,14 @@ function registrar() {
 		dataType: 'jsonp'
 	});
 	req.success(function () {
+		obtenerIdUsuario($("#txtUsername").val());
 		$("#txtNombre").val("");
 		$("#txtApellidos").val("");
-		$("#txtUsername").val("");
 		$("#txtCorreo").val("");
 		$("#txtContrasena").val("");
 		$("#txtCedula").val("");
 		$("#txtDireccionFisica").val("");
+		$("#txtUsername").val("");
 		swal({
 			title: "¡Felicidades!",
 		  	text: "Registro exitso",
@@ -39,4 +40,18 @@ function registrar() {
 
 function mensajeSuccess() {
 	registrar();
+}
+
+function obtenerIdUsuario(username) {
+    $.ajax({
+        url: 'http://pruebaservicioweb777.azurewebsites.net/ServiciosUsuario.svc/getIdByUsername?username=' + username,
+        dataType: 'jsonp',
+        timeout: 10000,
+        success: function(id) { ingresarIdUsuarioInSession(id); },
+        error: function(a, b, c) { error(a, b, c); }
+    });
+}
+
+function ingresarIdUsuarioInSession(id) {
+    sessionStorage.setItem('idUsuario', id);
 }
