@@ -137,7 +137,7 @@ function buscarPlatoPorId(id) {
 	});
 
 	req.success(function (plato) {listarPlatos(plato);});
-	req.error(function(a, b, c) {alert('Error interno de la base de datos\n' + a)});
+	req.error(function(a, b, c) {alert('Error interno de la base de datos\n' + a.toString())});
 }
 
 function calcularTotal(id) {
@@ -190,7 +190,7 @@ function enviarPedido() {
 	});
 	setTimeout(ganarTiempo(), 2000);
 	var idNuevoPedido = reqPedido.success(function(idResultado) { insertarDetalles(idResultado) });
-	reqPedido.error(function(a, b, c) {alert('Error interno de la base de datos\n' + a)});
+	reqPedido.error(function(a, b, c) {alert('Error interno de la base de datos\n' + a.toString())});
 }
 
 function obtenerFechaActual() {
@@ -215,7 +215,7 @@ function insertarDetalles(idNuevoPedido) {
 				dataType: 'jsonp'
 			});
 
-			req.error(function(a, b, c) {alert('Error interno de la base de datos\n' + a)});
+			req.error(function(a, b, c) {alert('Error interno de la base de datos\n' + a.toString())});
 			setTimeout (ganarTiempo(), 1000);
 		}
 	}
