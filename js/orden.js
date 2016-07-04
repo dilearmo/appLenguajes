@@ -188,8 +188,7 @@ function enviarPedido() {
 		timeout: 10000,
 		dataType: 'jsonp'
 	});
-	setTimeout(ganarTiempo(), 2000);
-	var idNuevoPedido = reqPedido.success(function(idResultado) { insertarDetalles(idResultado) });
+	var idNuevoPedido = reqPedido.success(function(idResultado) { setTimeout(insertarDetalles(idResultado), 2000); });
 	reqPedido.error(function(a, b, c) {alert('Error interno de la base de datos\n' + a.toString())});
 }
 
