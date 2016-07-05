@@ -8,7 +8,7 @@ function validarCampos() {
 
 function registrar() {
 	var req = $.ajax({
-		url: 'http://pruebaservicioweb777.azurewebsites.net/ServiciosUsuario.svc/agregarUsuario?nom=' + $("#txtNombre").val() + " " + $("#txtApellidos").val() + 
+		url: 'http://webserviceslenguajes.azurewebsites.net/ServiciosUsuario.svc/agregarUsuario?nom=' + $("#txtNombre").val() + " " + $("#txtApellidos").val() + 
 			'&nombreUsuario=' + $("#txtUsername").val() + '&correo=' + $("#txtCorreo").val() + '&contrasena=' + $("#txtContrasena").val() + 
 			'&cedula=' + $("#txtCedula").val() + '&rol=2&direccion=' + $("#txtDireccionFisica").val() + '&habilitado=1',
 		timeout: 10000,
@@ -44,14 +44,14 @@ function mensajeSuccess() {
 
 function obtenerIdUsuario(username) {
     $.ajax({
-        url: 'http://pruebaservicioweb777.azurewebsites.net/ServiciosUsuario.svc/getIdByUsername?username=' + username,
+        url: 'http://webserviceslenguajes.azurewebsites.net/ServiciosUsuario.svc/getIdByUsername?username=' + username,
         dataType: 'jsonp',
         timeout: 10000,
-        success: function(id) { ingresarIdUsuarioInSession(id); },
+        success: function(id) { sessionStorage.setItem('idUsuario', id); },
         error: function(a, b, c) { error(a, b, c); }
     });
 }
 
 function ingresarIdUsuarioInSession(id) {
-    sessionStorage.setItem('idUsuario', id);
+    
 }

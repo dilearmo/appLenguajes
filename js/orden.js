@@ -36,6 +36,14 @@ function getCantidad(id) {
 }
 
 function listarPlatos(plato) {
+	var req = $.ajax({
+		url: "http://webserviceslenguajes.azurewebsites.net/ServicioPlatos.svc/getNombreImagen?id=" + plato.id,
+		timeout: 10000,
+		dataType: 'jsonp',
+		async: false
+		});
+	req.success( function(imagen) {sessionStorage.setItem('img', imagen);});
+	setTimeout(function() {
 		var idPlato = plato.id;
 		var lista = document.getElementById('listaPlatos');
 		var li = document.createElement('li');
@@ -76,7 +84,7 @@ function listarPlatos(plato) {
 		imagen.setAttribute('height', '75');
 		imagen.setAttribute('id', 'img' + idPlato);
 		imagen.setAttribute('alt', 'Imagen');
-		imagen.setAttribute('src', 'http://pruebaservicioweb777.azurewebsites.net/images/Unown_D_(dream_world).png');
+		imagen.setAttribute('src', 'http://webserviceslenguajes.azurewebsites.net/images' + getImgSession());
 		divImg.appendChild(imagen);
 
 		var inputCantidad = document.createElement('input');
@@ -102,6 +110,7 @@ function listarPlatos(plato) {
 		lista.appendChild(li);
 		setCollapsible();
 		calcularTotal(idPlato);
+	}, 2000);
 }
 
 function eliminarPlato(id) {
@@ -131,7 +140,7 @@ function cerrarSesion() {
 
 function buscarPlatoPorId(id) {
 	var req = $.ajax({
-		url: "http://pruebaservicioweb777.azurewebsites.net/ServicioPlatos.svc/platoPorId?id=" + id,
+		url: "http://webserviceslenguajes.azurewebsites.net/ServicioPlatos.svc/platoPorId?id=" + id,
 		timeout: 10000,
 		dataType: 'jsonp'
 	});
@@ -178,12 +187,13 @@ function realizarPedido() {
 	function(){
 		enviarPedido();
 		swal("¡Listo!", "Su pedido ha sido enviado\n¡Pronto estará disfrutando su comida!", "success");
+		limpiarPlatosSession();
 	});
 }
 
 function enviarPedido() {
 	var reqPedido = $.ajax({
-		url: "http://pruebaservicioweb777.azurewebsites.net/ServiciosPedidos.svc/guardarPedido?estado=3&idCliente=" 
+		url: "http://webserviceslenguajes.azurewebsites.net/ServiciosPedidos.svc/guardarPedido?estado=3&idCliente=" 
 		+ sessionStorage.getItem("idUsuario") +"&fecha=" + obtenerFechaActual() + "&lat=" + $("#lat").val() + "&lon=" + $("#lon").val(),
 		timeout: 10000,
 		dataType: 'jsonp'
@@ -194,7 +204,7 @@ function enviarPedido() {
 
 function obtenerFechaActual() {
 	var fecha = new Date();
-	return fecha.getFullYear() + "-" + fecha.getMonth() + "-" + fecha.getDate() + " " + fecha.getHours() + ":" 
+	return fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate() + " " + fecha.getHours() + ":" 
 	+ fecha.getMinutes() + ":" + fecha.getSeconds() + "." + fecha.getMilliseconds();
 }
 
@@ -208,7 +218,7 @@ function insertarDetalles(idNuevoPedido) {
 		var item = sessionStorage.getItem(key);
 		if(key.search('plato') > -1) {
 			var req = $.ajax({
-				url: "http://pruebaservicioweb777.azurewebsites.net/ServiciosDetalles.svc/guardarDetalle?idPedido=" + idNuevoPedido 
+				url: "http://webserviceslenguajes.azurewebsites.net/ServiciosDetalles.svc/guardarDetalle?idPedido=" + idNuevoPedido 
 				+ "&idPlato=" + item + "&cantidad=" + sessionStorage.getItem("cantidad" + item),
 				timeout: 10000,
 				dataType: 'jsonp'
@@ -218,4 +228,49 @@ function insertarDetalles(idNuevoPedido) {
 			setTimeout (ganarTiempo(), 1000);
 		}
 	}
+}
+
+function getNombreImagen(id) {
+	var req = $.ajax({
+		url: "http://webserviceslenguajes.azurewebsites.net/ServicioPlatos.svc/getNombreImagen?id=" + id,
+		timeout: 10000,
+		dataType: 'jsonp',
+		async: false
+		});
+	alert(idPlato);
+	req.success( function(imagen) { sessionStorage.setItem('img', imagen);});
+}
+
+function getImgSession() {
+	var i = sessionStorage.getItem('img');
+	if (i.includes('null')) {
+		return '/default.png';
+	} else {
+		sessionStorage.setItem('img', null);
+		if(i.charAt(0) == "/") {
+			return i;
+		} else {
+			return "/" + i;
+		}
+	}
+}
+
+function limpiarPlatosSession() {
+	var idUsuario = sessionStorage.getItem('idUsuario');
+	sessionStorage.clear();
+	sessionStorage.setItem('idUsuario', idUsuario);
+	$("#listaPlatos").empty();
+	var li = document.createElement('li');
+	var div = document.createElement('div');
+	div.setAttribute('class', 'collapsible-header');
+	var spanPlato = document.createElement('span');
+	spanPlato.setAttribute('class', 'plato');
+	spanPlato.innerText = "Plato";
+	var spanPrecio = document.createElement('span');
+	spanPrecio.setAttribute('class', 'precio');
+	spanPrecio.innerText = "Precio";
+	div.appendChild(spanPlato);
+	div.appendChild(spanPrecio);
+	li.appendChild(div);
+	$("#listaPlatos").append(li);
 }

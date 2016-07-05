@@ -64,7 +64,7 @@ function loguear() {
 
 function logueo(nombreUsuario, contrasena) {
     $.ajax({
-        url: 'http://pruebaservicioweb777.azurewebsites.net/ServiciosUsuario.svc/login?nombreUsuario=' + nombreUsuario + '&contrasena=' + contrasena,
+        url: 'http://webserviceslenguajes.azurewebsites.net/ServiciosUsuario.svc/login?nombreUsuario=' + nombreUsuario + '&contrasena=' + contrasena,
         dataType: 'jsonp',
         timeout: 10000,
         success: function(datos) { ingresar(datos, nombreUsuario); },
@@ -82,7 +82,7 @@ function ingresar(datos, username) {
 
 function obtenerIdUsuario(username) {
     $.ajax({
-        url: 'http://pruebaservicioweb777.azurewebsites.net/ServiciosUsuario.svc/getIdByUsername?username=' + username,
+        url: 'http://webserviceslenguajes.azurewebsites.net/ServiciosUsuario.svc/getIdByUsername?username=' + username,
         dataType: 'jsonp',
         timeout: 10000,
         success: function(id) { ingresarIdUsuarioInSession(id); },

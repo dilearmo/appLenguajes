@@ -1,6 +1,6 @@
 function getListaPlatos() {
 	var req = $.ajax({
-		url: "http://pruebaservicioweb777.azurewebsites.net/ServicioPlatos.svc/obtenerPlatosDisponibles",
+		url: "http://webserviceslenguajes.azurewebsites.net/ServicioPlatos.svc/obtenerPlatosDisponibles",
 		timeout: 10000,
 		dataType: 'jsonp'
 	});

@@ -1,3 +1,24 @@
 body {
     background-color: white;
+    padding: 0px;
+}
+
+#barraNegra {
+	width: 100%;
+	height: 40px;
+	background-color: #101010;
+}
+
+#barraVerde {
+	width: 100%;
+	height: 10px;
+	background-color: #26a29a;
+}
+
+@media screen and (min-width: 480px) {
+ 	div.app {
+ 		text-align: center;
+ 		width: 50%;
+ 		margin-left: 25%;
+ 	}
 }
