@@ -36,14 +36,14 @@ function getCantidad(id) {
 }
 
 function listarPlatos(plato) {
-	var req = $.ajax({
+	/*var req = $.ajax({
 		url: "http://webserviceslenguajes.azurewebsites.net/ServicioPlatos.svc/getNombreImagen?id=" + plato.id,
 		timeout: 10000,
 		dataType: 'jsonp',
 		async: false
 		});
 	req.success( function(imagen) {sessionStorage.setItem('img', imagen);});
-	setTimeout(function() {
+	setTimeout(function() {*/
 		var idPlato = plato.id;
 		var lista = document.getElementById('listaPlatos');
 		var li = document.createElement('li');
@@ -84,7 +84,7 @@ function listarPlatos(plato) {
 		imagen.setAttribute('height', '75');
 		imagen.setAttribute('id', 'img' + idPlato);
 		imagen.setAttribute('alt', 'Imagen');
-		imagen.setAttribute('src', 'http://webserviceslenguajes.azurewebsites.net/images' + getImgSession());
+		imagen.setAttribute('src', 'http://webserviceslenguajes.azurewebsites.net/images/default.png'/*+ getImgSession()*/);
 		divImg.appendChild(imagen);
 
 		var inputCantidad = document.createElement('input');
@@ -110,7 +110,7 @@ function listarPlatos(plato) {
 		lista.appendChild(li);
 		setCollapsible();
 		calcularTotal(idPlato);
-	}, 2000);
+	/*}, 2000);*/
 }
 
 function eliminarPlato(id) {
@@ -187,7 +187,6 @@ function realizarPedido() {
 	function(){
 		enviarPedido();
 		swal("¡Listo!", "Su pedido ha sido enviado\n¡Pronto estará disfrutando su comida!", "success");
-		limpiarPlatosSession();
 	});
 }
 
@@ -198,7 +197,7 @@ function enviarPedido() {
 		timeout: 10000,
 		dataType: 'jsonp'
 	});
-	var idNuevoPedido = reqPedido.success(function(idResultado) { setTimeout(insertarDetalles(idResultado), 2000); });
+	reqPedido.success(function(idResultado) { setTimeout(insertarDetalles(idResultado), 2000); });
 	reqPedido.error(function(a, b, c) {alert('Error interno de la base de datos\n' + a.toString())});
 }
 
@@ -217,17 +216,24 @@ function insertarDetalles(idNuevoPedido) {
 		var key = sessionStorage.key(i);
 		var item = sessionStorage.getItem(key);
 		if(key.search('plato') > -1) {
+			var idActual = item;
 			var req = $.ajax({
 				url: "http://webserviceslenguajes.azurewebsites.net/ServiciosDetalles.svc/guardarDetalle?idPedido=" + idNuevoPedido 
 				+ "&idPlato=" + item + "&cantidad=" + sessionStorage.getItem("cantidad" + item),
 				timeout: 10000,
 				dataType: 'jsonp'
 			});
-
+			//limpiarPLatoDeSession(idActual);
 			req.error(function(a, b, c) {alert('Error interno de la base de datos\n' + a.toString())});
-			setTimeout (ganarTiempo(), 1000);
 		}
 	}
+}
+
+function limpiarPLatoDeSession(id) {
+	sessionStorage.removeItem("plato"+id);
+	sessionStorage.removeItem("cantidad"+id);
+	sessionStorage.removeItem("precio"+id);
+	$("#li"+id).remove();
 }
 
 function getNombreImagen(id) {

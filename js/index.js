@@ -85,9 +85,27 @@ function obtenerIdUsuario(username) {
         url: 'http://webserviceslenguajes.azurewebsites.net/ServiciosUsuario.svc/getIdByUsername?username=' + username,
         dataType: 'jsonp',
         timeout: 10000,
-        success: function(id) { ingresarIdUsuarioInSession(id); },
+        success: function(id) { verificarHabilitado(id); },
         error: function(a, b, c) { error(a, b, c); }
     });
+}
+
+function verificarHabilitado(id) {
+    $.ajax({
+        url: 'http://webserviceslenguajes.azurewebsites.net/ServiciosUsuario.svc/estaHabilitado?id=' + id,
+        dataType: 'jsonp',
+        timeout: 10000,
+        success: function(habilitado) { ingresarONo(habilitado, id); },
+        error: function(a, b, c) { error(a, b, c); }
+    });
+}
+
+function ingresarONo(habilitado, id) {
+    if(habilitado == 1) {
+        ingresarIdUsuarioInSession(id);
+    } else {
+        Materialize.toast("Su cuenta se encuentra deshabilitada.\nPor favor, contacte a la administración para más detalles.", 5000);
+    }
 }
 
 function ingresarIdUsuarioInSession(id) {

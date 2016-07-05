@@ -1,45 +1,97 @@
+function cargarInfoCliente() {
+	$.ajax({
+		url: "http://webserviceslenguajes.azurewebsites.net/ServiciosUsuario.svc/BuscarPorId?id=" + sessionStorage.getItem("idUsuario"),
+		timeout: 10000,
+		dataType: 'jsonp',
+		success: function(usuario) { cargarEnCampos(usuario); }
+	});
+}
+
+function cargarEnCampos(usuario) {
+	if(usuario != null) {
+		$("#txtNombre").val((usuario.nombre).split(" ")[0]);
+		$("#txtApellidos").val(getApellidos(usuario.nombre));
+		$("#txtDireccionFisica").val(usuario.direccion);
+		$("#txtCorreo").val(usuario.Correo);
+		$("#txtContrasena").val(usuario.contrasena);
+	}
+}
+
+function getApellidos(nombre) {
+	var array = nombre.split(" ");
+	var apes = "";
+	for (var i = 1; i <= array.length - 1; i++) {
+		apes += array[i] + " ";
+	}
+	return apes;
+} 
+
 function modificarNombre() {
-	var nuevoNombre = document.getElementById('txtNombre');
+	var nuevoNombre = document.getElementById('txtNombre').value;
 	if (nuevoNombre != "") {
-		// Guardar
+		return 1;
 	} else {
-		alert('Debe especificar un nombre');
+		Materialize.toast('Debe especificar un nombre', 2000);
+		return 0;
 	}
 }
 
 function modificarApellidos() {
-	var nuevosApe = document.getElementById('txtApellidos');
+	var nuevosApe = document.getElementById('txtApellidos').value;
 	if (nuevosApe != "") {
-		// Guardar
+		return 1;
 	} else {
-		alert('Debe especificar al menos un apellido');
+		Materialize.toast('Debe especificar al menos un apellido', 2000);
+		return 0;
 	}
 }
 
 function modificarContrasena() {
-	var nuevaContrasena = document.getElementById('txtContrasena');
+	var nuevaContrasena = document.getElementById('txtContrasena').value;
 	if (nuevaContrasena != "") {
-		// Guardar
+		return 1;
 	} else {
-		alert('Debe especificar una contraseña');
+		Materialize.toast('Debe especificar una contraseña', 2000);
+		return 0;
 	}
 }
 
 function modificarDireccion() {
-	var nuevaDireccion = document.getElementById('txtDireccionFisica');
+	var nuevaDireccion = document.getElementById('txtDireccionFisica').value;
 	if (nuevaDireccion != "") {
-		// Guardar
+		return 1;
 	} else {
-		alert('Debe especificar una dirección');
+		Materialize.toast('Debe especificar una dirección', 2000);
+		return 0;
 	}
 }
 
 function modificarEmail() {
-	var nuevoEmail = document.getElementById('txtEmail');
+	var nuevoEmail = document.getElementById('txtCorreo').value;
 	if (nuevoEmail != "") {
-		// Guardar
+		return 1;
 	} else {
-		alert('Debe especificar un email valido');
+		Materialize.toast('Debe especificar un correo electrónico valido', 2000);
+		return 0;
+	}
+}
+
+function modificarUsuario() {
+	var validacion = 0;
+	validacion += modificarNombre();
+	validacion += modificarEmail();
+	validacion += modificarDireccion();
+	validacion += modificarContrasena();
+	validacion += modificarApellidos();
+	if(validacion == 5) {
+		$.ajax({
+			url: "http://webserviceslenguajes.azurewebsites.net/ServiciosUsuario.svc/modificarCliente?id=" + sessionStorage.getItem("idUsuario")
+			+"&nombre=" + $("#txtNombre").val() + " " + $("#txtApellidos").val() + "&Correo=" + $("#txtCorreo").val()
+			+ "&contrasena=" + $("#txtContrasena").val() + "&direccion=" + $("#txtDireccionFisica").val(),
+			timeout: 10000,
+			dataType: 'jsonp',
+			success: function() { Materialize.toast("Datos actualizados", 3000); }
+		});
 	}
 }
 
