@@ -10,11 +10,16 @@ function cargarInfoCliente() {
 function cargarEnCampos(usuario) {
 	if(usuario != null) {
 		$("#txtNombre").val((usuario.nombre).split(" ")[0]);
+		$("#spanNombre").text((usuario.nombre).split(" ")[0]);
 		$("#txtApellidos").val(getApellidos(usuario.nombre));
+		$("#spanApellidos").text(getApellidos(usuario.nombre));
 		$("#txtDireccionFisica").val(usuario.direccion);
+		$("#spanDirFis").text(usuario.direccion);
 		$("#txtCorreo").val(usuario.Correo);
+		$("#spanCorreo").text(usuario.Correo);
 		$("#txtContrasena").val(usuario.contrasena);
 	}
+
 }
 
 function getApellidos(nombre) {
